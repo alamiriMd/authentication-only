@@ -38,7 +38,7 @@ function LoginPage (){
     });
     const [userNotFound, setUserNotFound] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const authentication = useAppSelector(state => state.authentication.value);
+    const authentication = useAppSelector(state => state.authentication.loginStatus);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     useEffect(()=>{
@@ -66,15 +66,16 @@ function LoginPage (){
     return (<FixedContainer>
                 <CentralContainer>
                     <Logo>ONLY.</Logo>
-                    <Form onSubmit={handleSubmit(onSubmit)} autoComplete="on">
-                        <MessagesError primary userNotFound={userNotFound.toString()}>Пользователя {watch('email')} не существует</MessagesError>
+                    <Form onSubmit={handleSubmit(onSubmit)} >
+                        <MessagesError primary userNotFound={userNotFound.toString()}>
+                                <SVG name='exclamation' color='#EE6565' />
+                            <span>Пользователя {watch('email')} не существует</span>
+                            </MessagesError>
                         <Label htmlFor='email'>Логин</Label>
-                        <Input {...register('email')} type='emai' id='email'  title="Email" autoComplete="email" />
-                        <MessagesError>
-                            {errors && errors.email?<p>{errors.email.message}</p>:null}
-                        </MessagesError>
+                        <Input {...register('email')} type='emai' id='email'  title="Email" />
+                        <MessagesError>{errors && errors.email?<p>{errors.email.message}</p>:null}</MessagesError>
                         <Label htmlFor='password'>Пароль</Label>
-                        <Input {...register('password')} type='password'  id='password' title="Пароль" autoComplete='current-password' />
+                        <Input {...register('password')} type='password'  id='password' title="Пароль" />
                         <MessagesError>
                             {errors && errors.password?<p>{errors.password.message}</p>:null}
                         </MessagesError>

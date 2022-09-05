@@ -3,31 +3,31 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 const __nameInLocalStorage__:string = "userEmail";
 
 interface initialTypes {
-    value:boolean
-    user: {email:string|null}
-    
+    loginStatus:boolean
+    email:string|null
+    rememberPassword:boolean
 }
 
 const initialState: initialTypes = {
-    value:localStorage.getItem(__nameInLocalStorage__)?true:false,
-    user: {
-        email:localStorage.getItem(__nameInLocalStorage__) || null
-    }
+    loginStatus:localStorage.getItem(__nameInLocalStorage__)?true:false,
+    email:localStorage.getItem(__nameInLocalStorage__) || null,
+    rememberPassword:false
+
 }
 export const authenticationReducer = createSlice({
     name:'authentication',
     initialState,
     reducers: { 
         LOGOUT: state => {
-            state.value = false;
-            state.user = {
-                email:null
-            };
+            state.loginStatus = false;
+            state.email = null;
+            state.rememberPassword = false;
             if(localStorage.getItem(__nameInLocalStorage__))localStorage.removeItem(__nameInLocalStorage__);
         },
-        LOGIN: (state, action:PayloadAction<{email:string, password?:string, rememberPassword?:boolean}>) => {
-            state.value = true;
-            state.user.email = action.payload.email;
+        LOGIN: (state, action:PayloadAction<{email:string, password?:string, rememberPassword:boolean}>) => {
+            state.loginStatus = true;
+            state.email = action.payload.email;
+            state.rememberPassword = action.payload.rememberPassword;
             localStorage.setItem(__nameInLocalStorage__, action.payload.email);
         }
     }

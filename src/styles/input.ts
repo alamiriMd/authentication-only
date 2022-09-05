@@ -1,14 +1,18 @@
 import styled from 'styled-components';
 
-
 export const Input = styled.input`
     border-radius:3px;
     border:1px solid lightgray;
-    padding:10px;
+    padding:20px;
     border:none;
+    font-size:16px;
     background:#F5F5F5;
     &:focus{
         outline:1px solid #E26F6F;
+    }
+    @media(max-width:500px){
+        font-size:12px;
+        padding:10px;
     }
 `;
 export const CheckBox = styled.input.attrs({type:'checkbox'})`
@@ -39,5 +43,12 @@ export const CheckBoxContainer  = styled.div`
     }
     > label > input:checked + svg {
         opacity:1;
+    }
+
+    @media(max-width: 500px){
+       
+       > label > svg {
+        margin-top:0;
+       }
     }
 `;

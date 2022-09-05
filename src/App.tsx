@@ -5,7 +5,7 @@ import ProfilePage from './pages/profile';
 import { useAppSelector } from './redux/hooks';
 
 export default function App() {
-  const authentication = useAppSelector( state => state.authentication.value);
+  const authentication = useAppSelector( state => state.authentication.loginStatus);
   const toURL = ():string => {
     if(authentication)return '/profile';
     return '/login'; 

@@ -8,21 +8,20 @@ import { useNavigate } from 'react-router-dom';
 import { LOGOUT } from '../redux/reducers/authenication';
 
 function ProfilePage (){
-    const authentication = useAppSelector(state => state.authentication.value);
-    const user = useAppSelector(state => state.authentication.user);
+    const authentication = useAppSelector(state => state.authentication);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     useEffect(()=>{
-        if(!authentication)navigate('/login');
+        if(!authentication.loginStatus)navigate('/login');
     }, [authentication, navigate]);
 
     return (<FixedContainer>
-                <CentralContainer>
+                <CentralContainer $profile >
                     <Logo>ONLY.</Logo>
                     <div>
-                        <UserEmailContainer>Здравствуйте, <strong>{user.email}</strong></UserEmailContainer>
+                        <UserEmailContainer>Здравствуйте, <strong>{authentication.email}</strong></UserEmailContainer>
                         <CentralContainer>
-                            <Button onClick={()=> dispatch(LOGOUT())} type='submit'>Войти</Button>
+                            <Button onClick={()=> dispatch(LOGOUT())} type='submit'>Выйти</Button>
                         </CentralContainer>
                     </div>
                 </CentralContainer>

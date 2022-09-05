@@ -14,4 +14,7 @@ export const Logo = styled.div`
     letter-spacing: 0em;
     text-align: left;
 
+    @media(max-width: 500px){
+        font-size:34px;
+    }
 `;
